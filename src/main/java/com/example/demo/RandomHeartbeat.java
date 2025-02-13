@@ -11,6 +11,6 @@ public class RandomHeartbeat implements HeartbeatSensor {
 
     @Override
     public int get() {
-        return random.nextInt(100);
+        return this.random.nextInt( 40, 230);
     }
 }
