@@ -10,23 +10,23 @@ public class UserController {
     public UserService userService;
 
     @PostMapping("/users")
-    public UserDto createUser(@RequestBody UserCreationParams params) {
-        return null;
+    public UserCreationParams createUser(@RequestBody  UserCreationParams params) {
+        return userService.createUser(params);
     }
 
     @GetMapping("/users/{userId}")
     public UserDto getUser(@PathVariable String userId) {
-        return null;
+        return userService.getUser(userId);
     }
 
     @PutMapping("/users/{userId}")
-    public UserDto updateUser(@PathVariable String userId) {
-        return null;
+    public UserDto updateUser(@PathVariable String userId, @RequestBody  UserCreationParams params) {
+        return userService.updateUser(userId, params);
     }
 
     @DeleteMapping("/users/{userId}")
-    public void deleteUser(@PathVariable String userId) {
-
+    public boolean deleteUser(@PathVariable String userId) {
+        return this.userService.deleteUser(userId);
     }
 
 }
