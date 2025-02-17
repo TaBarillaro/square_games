@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -13,10 +14,12 @@ import java.util.stream.Stream;
 public class JdbcUserDao implements UserDao {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
+    private final UserEntityRepository userEntityRepository;
 
     @Autowired
-    public JdbcUserDao(NamedParameterJdbcTemplate jdbcTemplate) {
+    public JdbcUserDao(NamedParameterJdbcTemplate jdbcTemplate, UserEntityRepository userEntityRepository) {
         this.jdbcTemplate = jdbcTemplate;
+        this.userEntityRepository = userEntityRepository;
     }
 
 
@@ -38,8 +41,15 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public User upsert(User user) {
+    public User upsert(@NotNull User userDto) {
+        UserEntity userEntity = new UserEntity();
+        userEntity = userEntityRepository.save(userEntity);
+        return toDto(userEntity);
+    }
+
+    private User toDto(UserEntity userEntity) {
         return null;
+
     }
 
     @Override

@@ -9,10 +9,14 @@ public class UserController {
     @Autowired
     public UserService userService;
 
+    @Autowired
+    public UserEntityRepository userEntityRepository;
+
     @PostMapping("/users")
-    public User createUser(@RequestBody User params) {
-        User user = new User(params.id, params.email, params.password);
-        return this.userService.createUser(user);
+    public UserEntity createUser(@RequestBody UserEntity params) {
+
+        UserEntity userEntity = new UserEntity(params.email, params.password);
+        return this.userEntityRepository.save(userEntity);
     }
 
     @GetMapping("/users/{userId}")
