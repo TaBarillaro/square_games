@@ -1,10 +1,16 @@
 package com.example.demo;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+
 public interface UserService {
 
-   UserCreationParams createUser(UserCreationParams params);
-    UserDto getUser(String userId);
-    UserDto updateUser(String userId, UserCreationParams params);
-    boolean deleteUser(String userId);
+    User createUser(User user);
+    User getUserById(int userId);
+    User updateUser(User user);
+    User deleteUser(int userId);
 
+    Stream<User> findAll();
+
+    Optional<User> findById(int userId);
 }
