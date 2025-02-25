@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 @Service
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(int userId) {
+    public User getUserById(UUID userId) {
         Optional<User> user = userDao.findById(userId);
         return user.orElse(null);
     }
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User deleteUser(int userId) {
+    public User deleteUser(UUID userId) {
         Optional<User> user = userDao.findById(userId);
         if (user.isPresent()) {
             userDao.delete(userId);
@@ -47,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findById(int userId) {
+    public Optional<User> findById(UUID userId) {
         return userDao.findById(userId);
     }
 

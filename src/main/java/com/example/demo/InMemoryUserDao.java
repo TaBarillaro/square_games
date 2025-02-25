@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 @Service
@@ -17,7 +18,7 @@ public class InMemoryUserDao implements UserDao {
     }
 
     @Override
-    public Optional<User> findById(int userId) {
+    public Optional<User> findById(UUID userId) {
         return Optional.empty();
     }
 
@@ -27,7 +28,7 @@ public class InMemoryUserDao implements UserDao {
     }
 
     @Override
-    public void delete(int userId) {
+    public void delete(UUID userId) {
 
     }
 

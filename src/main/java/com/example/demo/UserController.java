@@ -3,6 +3,8 @@ package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 public class UserController {
 
@@ -20,8 +22,9 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public UserDto getUser(@PathVariable String userId) {
-        return new UserDto(userId, "test@test.com");
+    public UserDto getUser(@PathVariable UUID userId) {
+
+        return new UserDto(userId, userService.getUserById(userId).email);
     }
 
     @PutMapping("/users/{userId}")
