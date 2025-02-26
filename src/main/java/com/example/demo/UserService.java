@@ -1,17 +1,20 @@
 package com.example.demo;
 
+import jakarta.validation.constraints.NotNull;
+import org.springframework.validation.annotation.Validated;
+
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
 
 public interface UserService {
 
-    User createUser(User user);
-    User getUserById(UUID userId);
+    @NotNull UserDto createUser(@Validated @NotNull UserCreationParams params);
+    UserDto getUserById(String userId);
     User updateUser(User user);
-    User deleteUser(UUID userId);
+    User deleteUser(String userId);
 
     Stream<User> findAll();
 
-    Optional<User> findById(UUID userId);
+    Optional<User> findById(String userId);
 }

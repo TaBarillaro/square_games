@@ -31,8 +31,8 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public Optional<User> findById(UUID userId) {
-        String sql = "select * from users where id = :id";
+    public Optional<User> findById(String userId) {
+        String sql = "select * from user_entity where id = :id";
         Map<String, Object> params = new HashMap<>();
         params.put("id", userId);
 
@@ -53,7 +53,7 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public void delete(UUID userId) {
+    public void delete(String userId) {
 
     }
 

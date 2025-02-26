@@ -1,8 +1,11 @@
 package com.example.demo;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -17,14 +20,18 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User createUser(User user) {
-        return userDao.upsert(user);
+    public UserDto createUser(@Validated @NotNull UserCreationParams params) {
+        String userId = UUID.randomUUID().toString();
+        User user = new User(userId, params.email, params.password);
+        return toDto(userDao.upsert(user));
+
+//        return userDao.upsert(user);
     }
 
     @Override
-    public User getUserById(UUID userId) {
-        Optional<User> user = userDao.findById(userId);
-        return user.orElse(null);
+    public UserDto getUserById(@NotNull @Size(min = 36, max = 36) String userId) {
+        User user = userDao.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        return toDto(user);
     }
 
     @Override
@@ -33,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User deleteUser(UUID userId) {
+    public User deleteUser(String userId) {
         Optional<User> user = userDao.findById(userId);
         if (user.isPresent()) {
             userDao.delete(userId);
@@ -47,9 +54,14 @@ public class UserServiceImpl implements UserService {
         return userDao.findAll();
     }
 
+
     @Override
-    public Optional<User> findById(UUID userId) {
+    public Optional<User> findById(String userId) {
         return userDao.findById(userId);
+    }
+
+    private UserDto toDto(User user) {
+        return new UserDto(user.id, user.email);
     }
 
 }
