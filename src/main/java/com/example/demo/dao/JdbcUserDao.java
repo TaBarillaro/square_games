@@ -1,11 +1,12 @@
-package com.example.demo;
+package com.example.demo.dao;
 
+import com.example.demo.entity.User;
+import com.example.demo.entity.UserEntity;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Stream;

@@ -1,6 +1,4 @@
-package com.example.demo;
-
-import java.util.UUID;
+package com.example.demo.dto;
 
 public final class UserDto {
     public final String id;

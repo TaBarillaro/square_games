@@ -1,12 +1,8 @@
-package com.example.demo;
+package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
-
-import java.util.UUID;
 
 
 public class User {

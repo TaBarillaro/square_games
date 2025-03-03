@@ -1,9 +1,9 @@
-package com.example.demo;
+package com.example.demo.dao;
 
+import com.example.demo.entity.User;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Stream;
 
 public interface UserDao {

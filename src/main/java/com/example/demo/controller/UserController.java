@@ -1,5 +1,10 @@
-package com.example.demo;
+package com.example.demo.controller;
 
+import com.example.demo.dao.UserEntityRepository;
+import com.example.demo.dto.UserCreationParams;
+import com.example.demo.dto.UserDto;
+import com.example.demo.entity.UserEntity;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +35,6 @@ public class UserController {
         } catch (IllegalArgumentException e) {
             throw new CredentialNotFoundException("Invalid UUID String" + userId);
         }
-//        return new UserDto(userId, userService.getUserById(userId).email);
     }
 
     @PutMapping("/users/{userId}")

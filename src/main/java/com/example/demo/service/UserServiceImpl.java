@@ -1,5 +1,9 @@
-package com.example.demo;
+package com.example.demo.service;
 
+import com.example.demo.entity.User;
+import com.example.demo.dto.UserCreationParams;
+import com.example.demo.dto.UserDto;
+import com.example.demo.dao.UserDao;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createUser(@Validated @NotNull UserCreationParams params) {
         String userId = UUID.randomUUID().toString();
-        User user = new User(userId, params.email, params.password);
+        User user = new User(userId, params.email(), params.password());
         return toDto(userDao.upsert(user));
 
 //        return userDao.upsert(user);
