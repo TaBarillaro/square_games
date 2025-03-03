@@ -18,7 +18,7 @@ public class UserController {
     @PostMapping("/users")
     public UserEntity createUser(@RequestBody UserEntity params) {
 
-        UserEntity userEntity = new UserEntity(params.email, params.password);
+        UserEntity userEntity = new UserEntity(params.getEmail(), params.getPassword());
         return this.userEntityRepository.save(userEntity);
     }
 

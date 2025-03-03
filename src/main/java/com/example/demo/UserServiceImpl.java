@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserDto toDto(User user) {
-        return new UserDto(user.id, user.email);
+        return new UserDto(user.getId(), user.getEmail());
     }
 
 }

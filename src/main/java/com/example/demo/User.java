@@ -11,9 +11,9 @@ import java.util.UUID;
 
 public class User {
 
-    public String id;
-    public @Email @NotEmpty String email;
-    public @NotEmpty @Min(6) String password;
+    private String id;
+    private @Email @NotEmpty String email;
+    private @NotEmpty @Min(6) String password;
 
     public User(String id, String email, String password) {
         this.id = id;
@@ -25,5 +25,27 @@ public class User {
 
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
