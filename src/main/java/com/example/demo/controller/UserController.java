@@ -20,10 +20,11 @@ public class UserController {
     @Autowired
     public UserEntityRepository userEntityRepository;
 
-    @PostMapping("/users")
+    @PostMapping("/auth/users")
     public UserEntity createUser(@RequestBody UserEntity params) {
+        String role = params.getRole() != null ? params.getRole() : "USER";
 
-        UserEntity userEntity = new UserEntity(params.getEmail(), params.getPassword());
+        UserEntity userEntity = new UserEntity(params.getEmail(), params.getPassword(), role, java.time.LocalDate.now().toString());
         return this.userEntityRepository.save(userEntity);
     }
 

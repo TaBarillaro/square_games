@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.entity.User;
+import com.example.demo.entity.UserEntity;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,11 @@ public class InMemoryUserDao implements UserDao {
     @Override
     public void delete(String userId) {
 
+    }
+
+    @Override
+    public UserEntity findByEmail(String username) {
+        return null;
     }
 
 //    @Override

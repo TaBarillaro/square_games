@@ -58,4 +58,9 @@ public class JdbcUserDao implements UserDao {
 
     }
 
+    @Override
+    public UserEntity findByEmail(String username) {
+        return null;
+    }
+
 }

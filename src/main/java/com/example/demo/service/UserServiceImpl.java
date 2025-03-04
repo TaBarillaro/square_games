@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createUser(@Validated @NotNull UserCreationParams params) {
         String userId = UUID.randomUUID().toString();
-        User user = new User(userId, params.email(), params.password());
+        User user = new User(userId, params.email(), params.password(), "USER");
         return toDto(userDao.upsert(user));
 
 //        return userDao.upsert(user);

@@ -1,12 +1,11 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -19,7 +18,8 @@ import java.util.UUID;
 public class UserEntity implements UserDetails {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
     private @NotNull @Email String email;
     private @NotNull String password;
     private @NotNull String role;
@@ -27,24 +27,25 @@ public class UserEntity implements UserDetails {
     @Column(updatable = false, name = "created_at")
     private Date createdAt;
 
-    public UserEntity(String id, String email, String password, String role, Date createdAt) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.role = role;
+    public UserEntity(Date createdAt, String role, String password, String email) {
         this.createdAt = createdAt;
+        this.role = role;
+        this.password = password;
+        this.email = email;
     }
 
-    public UserEntity() {}
+    public UserEntity() {
 
-    public UserEntity(String email, String password) {
     }
 
-    public void setId(String id) {
+    public UserEntity(String email, String password, String role, String string) {
+    }
+
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -58,7 +59,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role));
     }
 
     public String getPassword() {
@@ -69,6 +70,7 @@ public class UserEntity implements UserDetails {
     public String getUsername() {
         return "";
     }
+
 
     @Override
     public boolean isAccountNonExpired() {

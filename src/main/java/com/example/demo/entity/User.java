@@ -3,6 +3,10 @@ package com.example.demo.entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.List;
 
 
 public class User {
@@ -10,6 +14,7 @@ public class User {
     private String id;
     private @Email @NotEmpty String email;
     private @NotEmpty @Min(6) String password;
+
 
     public User(String id, String email, String password) {
         this.id = id;
@@ -19,6 +24,12 @@ public class User {
 
     public User() {
 
+    }
+
+    public User(String userId, @NotNull @Email String email, @NotEmpty String password, String user) {
+    }
+
+    public User(String email, String password) {
     }
 
     public String getId() {

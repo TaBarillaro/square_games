@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.entity.User;
+import com.example.demo.entity.UserEntity;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Optional;
@@ -13,4 +14,5 @@ public interface UserDao {
     @NotNull User upsert(@NotNull User user);
     void delete(String userId);
 
+    UserEntity findByEmail(String username);
 }
