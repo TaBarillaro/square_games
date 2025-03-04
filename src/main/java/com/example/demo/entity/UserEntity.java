@@ -16,15 +16,13 @@ public class UserEntity {
     private @NotNull @Email String email;
     private @NotNull String password;
     private @NotNull String role;
-    private @NotNull boolean enabled;
     private String creationDate;
 
-    public UserEntity(@NotNull @Email String email, @NotNull String password, @NotNull String role, boolean enabled, @NotNull String creationDate) {
+    public UserEntity(@NotNull @Email String email, @NotNull String password, @NotNull String role, @NotNull String creationDate) {
         this.email = email;
         this.password = password;
         this.id = UUID.randomUUID().toString();
         this.role = role;
-        this.enabled = enabled;
         this.creationDate = java.time.LocalDate.now().toString();
     }
 
@@ -63,14 +61,6 @@ public class UserEntity {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     public String getCreationDate() {
