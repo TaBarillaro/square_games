@@ -1,29 +1,38 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 
 @Entity
-public class UserEntity {
+public class UserEntity implements UserDetails {
 
     @Id
     private String id;
     private @NotNull @Email String email;
     private @NotNull String password;
     private @NotNull String role;
-    private String creationDate;
+    @CreationTimestamp
+    @Column(updatable = false, name = "created_at")
+    private Date createdAt;
 
-    public UserEntity(@NotNull @Email String email, @NotNull String password, @NotNull String role, @NotNull String creationDate) {
+    public UserEntity(String id, String email, String password, String role, Date createdAt) {
+        this.id = id;
         this.email = email;
         this.password = password;
-        this.id = UUID.randomUUID().toString();
         this.role = role;
-        this.creationDate = java.time.LocalDate.now().toString();
+        this.createdAt = createdAt;
     }
 
     public UserEntity() {}
@@ -47,8 +56,38 @@ public class UserEntity {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return "";
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
     }
 
     public void setPassword(String password) {
@@ -63,11 +102,13 @@ public class UserEntity {
         this.role = role;
     }
 
-    public String getCreationDate() {
-        return creationDate;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
+
+
 }
